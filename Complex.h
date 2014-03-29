@@ -25,18 +25,11 @@ private:
 public:
     Complex(float=0, float=0);
 
-    /*//PART ONE
-    const Complex addComplex(const Complex &) const;
-    void displayComplex();
-    void inputComplex();
-    friend Complex addComplex(const float, const Complex&);
-    
-    */
-    //PART TWO
     friend Complex operator+(const float, const Complex&);
     Complex operator+ (const Complex &) const;
     friend istream& operator>>(istream&, Complex&);
     friend ostream& operator<<(ostream&, Complex&);
+    bool operator== (const Complex& lhs) const;
     
 };
 

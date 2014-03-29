@@ -134,3 +134,10 @@ ostream& operator<<(ostream& lhs, Complex& rhs){
 
 }
 
+//operator==: checks to see if two complex objects are equal
+bool Complex: operator== (const Complex& lhs) const{
+
+
+
+}
+
