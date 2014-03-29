@@ -26,7 +26,7 @@ int main(){
 	
 	//test = testComplex + test;
 	//test = testComplex2 + test;
-	test = testComplex + test;
+	test = test + testComplex2;
 	//Set test2;
 	//test2 = test;
 	cout<<test<<endl;

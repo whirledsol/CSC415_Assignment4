@@ -84,8 +84,9 @@ class Set
 	public:
 
 		Set();
-		friend Set operator+ (const Complex&,const Set&);
-		friend Set operator+ (const Set&,const Complex&);
+		friend Set operator+ (const Complex&,Set&);
+		friend Set operator+ (Set&,const Complex&);
+		friend Set operator- (Set&, const Complex&);
 		bool isEmpty();
 		bool isFull();
 		Set& operator= (const Set&);
@@ -105,7 +106,7 @@ class Set
 			//the array of complex objects with no duplicates and unsorted
 		int arraySize;
 			//keeps track of the valid elements in the array
-		bool inSet(Complex);
+		int find(Complex);
 			//determines if the Complex obj is in the set
 		void throwError(string);
 			//displays an error to the user and clears cin

@@ -29,7 +29,7 @@ public:
     Complex operator+ (const Complex &) const;
     friend istream& operator>>(istream&, Complex&);
     friend ostream& operator<<(ostream&, Complex&);
-    bool operator== (const Complex& lhs) const;
+    bool operator== (const Complex&);
     
 };
 

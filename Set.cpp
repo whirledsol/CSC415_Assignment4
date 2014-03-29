@@ -27,7 +27,7 @@ Set::Set(){
 /*
 	adds a new Complex element to the array but only if element doesn't already exist
 */
-Set operator+ (const Complex& lhs, const Set& rhs){
+Set operator+ (const Complex& lhs, Set& rhs){
 
 	Set temp;
 	temp = rhs;
@@ -37,9 +37,11 @@ Set operator+ (const Complex& lhs, const Set& rhs){
 		return rhs;
 	}
 	else{
-		temp.array[temp.arraySize] = lhs;
-		temp.arraySize = temp.arraySize+1;
-		cout<<temp.arraySize<<endl;
+		if ( rhs.find(lhs) < 0  ){
+			//the lhs is not in the set, add it
+			temp.array[temp.arraySize] = lhs;
+			temp.arraySize = temp.arraySize+1;
+		}
 	}
 	return temp;
 	
@@ -48,7 +50,7 @@ Set operator+ (const Complex& lhs, const Set& rhs){
 /*
 	adds a new Complex element to the array but only if element doesn't already exist
 */
-Set operator+ (const Set& lhs,const Complex& rhs){
+Set operator+ (Set& lhs,const Complex& rhs){
 	return operator+(rhs,lhs);
 }
 //////////////////////////////////////////////////////////////////////
@@ -171,14 +173,13 @@ void Set::throwError(string msg){
 /*
 	PRIVATE: determines if the Complex obj is in the set
 */
-bool Set::inSet(Complex thisComplex){
-
+int Set::find(Complex thisComplex){
 	for(int i = 0; i<arraySize; i++){
 		if (array[i] == thisComplex){
-			return true;		
+			return i;		
 		}
 	}
-	return false;
+	return -1;
 }
 
 
