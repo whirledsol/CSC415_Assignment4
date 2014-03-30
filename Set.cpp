@@ -14,6 +14,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <climits>
 using namespace std;
 //////////////////////////////////////////////////////////////////////
 /*
@@ -25,13 +26,41 @@ Set::Set(){
 }
 //////////////////////////////////////////////////////////////////////
 /*
+	creates the union between two sets
+*/
+Set Set::operator+ (const Set& rhs){
+	
+	//store in a third array
+	Set temp;
+	//get elements from the lhs
+	for(int i = 0; i<arraySize; i++){
+		temp = temp + array[i];
+	}
+	//go through rhs
+	for(int i = 0; i< rhs.arraySize; i++){
+		//check to see if the array is full here to display custom message
+		if(temp.isFull()){
+			temp.throwError("Could not obtain the union. Array is full.");
+			return rhs;
+		}
+		//array is not full, add the element from the second array
+		temp = temp + rhs.array[i];
+	}
+	
+	return temp;
+
+}
+//////////////////////////////////////////////////////////////////////
+/*
 	adds a new Complex element to the array but only if element doesn't already exist
 */
 Set operator+ (const Complex& lhs, Set& rhs){
 
+	//store in a third array
 	Set temp;
 	temp = rhs;
-
+	
+	//check to see if we go over the array length
 	if(temp.isFull()){
 		temp.throwError("Array is full. Object not added.");
 		return rhs;
@@ -53,6 +82,33 @@ Set operator+ (const Complex& lhs, Set& rhs){
 Set operator+ (Set& lhs,const Complex& rhs){
 	return operator+(rhs,lhs);
 }
+//////////////////////////////////////////////////////////////////////
+/*
+	adds a new Complex element to the array but only if element doesn't already exist
+*/
+Set operator- (Set& lhs,const Complex& rhs){
+
+	//find the element in the set
+	int location = lhs.find(rhs);
+	if(location < 0){
+		//element not found
+		lhs.throwError("Item not in Set.");
+		return lhs;
+	}
+	else{
+		//we found the item in the set
+
+		//create a temp set, which is a copy of lhs
+		Set temp;
+		temp = lhs;
+		//replace the last element with the found element and subtract total size
+		temp.array[location] = temp.array[temp.arraySize-1];
+		temp.arraySize = temp.arraySize - 1;
+		return temp;
+	}
+	
+}
+
 //////////////////////////////////////////////////////////////////////
 /*
 	checks if set is empty
@@ -125,20 +181,21 @@ Set& Set::operator= (const Set& rhs){
 //////////////////////////////////////////////////////////////////////
 /*
 	replaces one set with rhs value
-
-void Set::operator= (const Complex& rhs){
+*/
+Set& Set::operator= (const Complex& rhs){
 	array[0] = rhs;
 	arraySize = 1;
-}*/
+	return *this;
+}
 //////////////////////////////////////////////////////////////////////
 /*
 	Overloads the insertion operator to display the set
 */
-ostream& operator<<(ostream& lhs, Set& rhs){
+ostream& operator<<(ostream& lhs, Set rhs){
 	//add beginning obj	
 	if (rhs.arraySize == 0)
 	{
-		lhs<<"{ }";
+		lhs<<"{}";
 	}
 	else
 	{
@@ -153,12 +210,24 @@ ostream& operator<<(ostream& lhs, Set& rhs){
 	return lhs;
 
 }
-		//TODO
-		/*Set operator+ (const Set&) const;
-		Set operator+ (const float) const;
-		Set operator* (const Set&) const;
-		*/
+//////////////////////////////////////////////////////////////////////
+/*
+	Overloads the * operator to find the intersection of two sets
+*/
+Set Set::operator* (Set& rhs){
 
+	//create a temporary set
+	Set temp;
+	//go through "lhs" array
+	for (int i = 0; i<arraySize;i++){
+		if(rhs.find(array[i]) >= 0){
+			//the element in the lhs array is found in the rhs array
+			temp = temp + array[i];
+		}
+
+	}
+	return temp;
+}
 
 //////////////////////////////////////////////////////////////////////
 /*
@@ -166,7 +235,7 @@ ostream& operator<<(ostream& lhs, Set& rhs){
 */
 void Set::throwError(string msg){
 	cout<<msg<<endl;
-	cin.ignore(80000);
+	cin.ignore(INT_MAX);
 	cin.clear();
 }
 //////////////////////////////////////////////////////////////////////

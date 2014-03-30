@@ -33,8 +33,9 @@ int main()
 	while (!done)
 	{
 		
-		// DO: declare the input file stream object
-		
+		// declare the input file stream object
+		ifstream fin;
+
 		// test isEmpty() method
 		
 		if (setA.isEmpty())
@@ -67,11 +68,12 @@ int main()
 		cout << "The file should have the number of elements, followed by the elements." << endl;
 		cout << "Separate elements with a whitespace" << endl;
 		
-		// DO: Add code to open the file to read from.
-		
+		// Add code to open the file to read from.
+		fin.open(inFileName.c_str());
+
 		// The statement below assumes the input file stream object is called fin
-		
-		fin >> setA;
+		//SHOULD BE SETB
+		fin >> setB;
 		
 		
 		// test the overloaded << operator
@@ -110,10 +112,10 @@ int main()
 		cout << "The union of Set A and Set B (setA + setB) is " << setD << endl;
 		
 		setA = setA + C1;
-		cout << "After adding a complec number to the set, Set A is " << setA << endl;
+		cout << "After adding a complex number to the set, Set A is " << setA << endl;
 		
 		setD = C1 + setD;
-		cout << "After adding a complec number to the set, Set A is " << setA << endl;
+		cout << "After adding a complex number to the set, Set A is " << setA << endl;
 		
 		// test the * operator
 		
@@ -151,8 +153,8 @@ int main()
 			cout << "setE is not full" << endl;
 		
 		// test the - operator
-		
-		cout << "After removing C1, setA is " << setA << endl;
+		setA = setA - C1;
+		cout << "After removing C1, setA is " << setA<< endl;
 		
 		// display all sets
 		cout << "setA is " << setA << endl;
@@ -181,6 +183,4 @@ int main()
 	
 	cout << "Thanks for using this program." << endl;
 	cout << "Goodbye! " << endl;
-}
-
-*/
+}*/
