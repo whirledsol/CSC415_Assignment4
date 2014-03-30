@@ -41,7 +41,8 @@ Set Set::operator+ (const Set& rhs){
 		//check to see if the array is full here to display custom message
 		if(temp.isFull()){
 			temp.throwError("Could not obtain the union. Array is full.");
-			return rhs;
+			//return the full array with as many union elements as we can muster
+			return temp;
 		}
 		//array is not full, add the element from the second array
 		temp = temp + rhs.array[i];
@@ -86,21 +87,21 @@ Set operator+ (Set& lhs,const Complex& rhs){
 /*
 	adds a new Complex element to the array but only if element doesn't already exist
 */
-Set operator- (Set& lhs,const Complex& rhs){
+Set Set::operator- (const Complex& rhs){
 
 	//find the element in the set
-	int location = lhs.find(rhs);
+	int location = find(rhs);
 	if(location < 0){
 		//element not found
-		lhs.throwError("Item not in Set.");
-		return lhs;
+		throwError("Item not in Set.");
+		return *this;
 	}
 	else{
 		//we found the item in the set
 
 		//create a temp set, which is a copy of lhs
 		Set temp;
-		temp = lhs;
+		temp = *this;
 		//replace the last element with the found element and subtract total size
 		temp.array[location] = temp.array[temp.arraySize-1];
 		temp.arraySize = temp.arraySize - 1;
@@ -148,7 +149,12 @@ istream& operator>>(istream& lhs, Set& rhs){
 	{
 		//we know the number of objects so write a for loop
 		for(int i=0; i<numofLines;i++){
-			
+			//check to see if we are going out of the bounds of the file
+			if(lhs.eof()){
+				rhs.throwError("Reached the end of the file.");
+				return lhs;			
+			}
+			//use Complex obj's extraction override			
 			Complex tempComplex;
 			lhs>>tempComplex;
 			rhs = tempComplex + rhs;
@@ -191,7 +197,7 @@ Set& Set::operator= (const Complex& rhs){
 /*
 	Overloads the insertion operator to display the set
 */
-ostream& operator<<(ostream& lhs, Set rhs){
+ostream& operator<<(ostream& lhs, Set& rhs){
 	//add beginning obj	
 	if (rhs.arraySize == 0)
 	{
@@ -222,6 +228,7 @@ Set Set::operator* (Set& rhs){
 	for (int i = 0; i<arraySize;i++){
 		if(rhs.find(array[i]) >= 0){
 			//the element in the lhs array is found in the rhs array
+			//add to temp
 			temp = temp + array[i];
 		}
 

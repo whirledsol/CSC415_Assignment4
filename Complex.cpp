@@ -22,68 +22,6 @@ Complex::Complex (float r, float i)
   imag = i;
 }
 
-/*
-//////////////////////////
-//   PART ONE
-//////////////////////////
-
-//addComplex(const Complex&): adds two complex numbers
-const Complex Complex::addComplex(const Complex& rhs) const{
-  Complex res;
-  res.real = real + rhs.real;
-  res.imag = imag + rhs.imag;
-
-  return res;
-}
-
-
-//addComplex(const float, const Complex&): adds a real number (float) and a complex number
-Complex addComplex(const float lhs, const Complex& rhs){
-  Complex result;
-  result.real = lhs + rhs.real;
-  result.imag = rhs.imag;
-
-  return result;
-}
-
-
-//inputComplex(): mutator to assign the attrs to the complex number
-void Complex::inputComplex() {
-  cin >> real;
-  cin >> imag;
-}
-
-
-
-//displayComplex(): Displays the complete complex number using fixed 1 precision
-void Complex::displayComplex() {
-
-  if(!(real==0.0 && imag != 0.0)){
-      cout << setprecision(1)<<fixed<<real;
-  }
-
-  //determines the sign for the imaginary component
-  if(imag == 0){
-    return;
-  }
-  else if (imag < 0){
-    cout << "-";
-  }
-  else{
-    cout << "+";
-  }
-
-  cout << abs(imag) << "i";
-}
-
-
-
-*/
-///////////////////////////////////////
-//    PART TWO
-//////////////////////////////////////
-
-
 //operator+: overwrites the addition operator between a float and complex obj
 Complex operator+(const float lhs, const Complex &rhs){
   Complex res;

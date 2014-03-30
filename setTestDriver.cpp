@@ -12,7 +12,7 @@
 // Description: Test driver 
 // Filename:  Driver.cpp
 // Last modified on: 3/31/2014
-/*
+
 #include <iostream>
 #include "Set.h"
 
@@ -72,7 +72,7 @@ int main()
 		fin.open(inFileName.c_str());
 
 		// The statement below assumes the input file stream object is called fin
-		//SHOULD BE SETB
+		//FIXED: THIS SHOULD BE SET B
 		fin >> setB;
 		
 		
@@ -115,7 +115,8 @@ int main()
 		cout << "After adding a complex number to the set, Set A is " << setA << endl;
 		
 		setD = C1 + setD;
-		cout << "After adding a complex number to the set, Set A is " << setA << endl;
+		//FIXED: THIS SHOULD BE SET D
+		cout << "After adding a complex number to the (union) set, Set D  is " << setD << endl;
 		
 		// test the * operator
 		
@@ -153,6 +154,7 @@ int main()
 			cout << "setE is not full" << endl;
 		
 		// test the - operator
+		//FIXED: THIS SHOULD PERFORM THE CALCULATION ON SET A
 		setA = setA - C1;
 		cout << "After removing C1, setA is " << setA<< endl;
 		
@@ -183,4 +185,4 @@ int main()
 	
 	cout << "Thanks for using this program." << endl;
 	cout << "Goodbye! " << endl;
-}*/
+}
