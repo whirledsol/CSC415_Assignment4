@@ -36,6 +36,9 @@ Description:
 	For more documentation, please see the .h files.
 	
 	
+	A Driver (setTestDriver.cpp) is provided to test all functionality. Please see and run the driver for additional comments.
+	Driver.cpp is used for testing purposes.
+	
 	
 		
 		
