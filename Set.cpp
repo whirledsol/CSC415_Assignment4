@@ -242,8 +242,9 @@ Set Set::operator* (Set& rhs){
 */
 void Set::throwError(string msg){
 	cout<<msg<<endl;
-	cin.ignore(INT_MAX);
-	cin.clear();
+	cin.clear(); //clear error flags
+    cin.ignore(INT_MAX,'\n'); //flush the buffer
+	
 }
 //////////////////////////////////////////////////////////////////////
 /*
