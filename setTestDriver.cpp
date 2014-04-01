@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include "Set.h"
+#include <climits>
 
 using namespace std;
 
@@ -70,7 +71,13 @@ int main()
 		
 		// Add code to open the file to read from.
 		fin.open(inFileName.c_str());
-
+        while(!fin.good()){
+            
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            cout<<"File was not found or opened. Program will exit."<<endl;
+            exit(1);
+        }
 		// The statement below assumes the input file stream object is called fin
 		//FIXED: THIS SHOULD BE SET B
 		fin >> setB;

@@ -6,7 +6,6 @@
 // Description: Cpp file for Set Object of Complex numbers 
 // Filename:  Set.cpp 
 // Last modified on: 3/31/2014
-//  Created by: Dr. Monisha Pulimood
 
 #include "Complex.h"
 #include "Set.h"
@@ -40,7 +39,7 @@ Set Set::operator+ (const Set& rhs){
 	for(int i = 0; i< rhs.arraySize; i++){
 		//check to see if the array is full here to display custom message
 		if(temp.isFull()){
-			temp.throwError("Could not obtain the union. Array is full.");
+			temp.throwError("* Could not obtain the union. Array is full.");
 			//return the full array with as many union elements as we can muster
 			return temp;
 		}
@@ -63,7 +62,7 @@ Set operator+ (const Complex& lhs, Set& rhs){
 	
 	//check to see if we go over the array length
 	if(temp.isFull()){
-		temp.throwError("Array is full. Object not added.");
+		temp.throwError("* Array is full. Object not added.");
 		return rhs;
 	}
 	else{
@@ -93,7 +92,7 @@ Set Set::operator- (const Complex& rhs){
 	int location = find(rhs);
 	if(location < 0){
 		//element not found
-		throwError("Item not in Set.");
+		throwError("* Item not in Set.");
 		return *this;
 	}
 	else{
@@ -143,7 +142,9 @@ istream& operator>>(istream& lhs, Set& rhs){
 	int numofLines;//get the number of lines in the input stream
 	if(!(lhs>>numofLines))
 	{
-		rhs.throwError("Input format was not valid");
+		rhs.throwError("* Input format was not valid");
+        cin.clear(); //clear error flags
+        cin.ignore(INT_MAX,'\n'); //flush the buffer
 	}
 	else
 	{
@@ -151,13 +152,20 @@ istream& operator>>(istream& lhs, Set& rhs){
 		for(int i=0; i<numofLines;i++){
 			//check to see if we are going out of the bounds of the file
 			if(lhs.eof()){
-				rhs.throwError("Reached the end of the file.");
+				rhs.throwError("* Reached the end of the file.");
 				return lhs;			
 			}
 			//use Complex obj's extraction override			
 			Complex tempComplex;
 			lhs>>tempComplex;
-			rhs = tempComplex + rhs;
+            //check to see if the set is full first
+            if(!rhs.isFull()){
+                                rhs = tempComplex + rhs;
+            }
+            else{
+                rhs.throwError("* Array is full. Object not added.");
+                return lhs;
+            }
 		}
 		
 	}
@@ -242,8 +250,6 @@ Set Set::operator* (Set& rhs){
 */
 void Set::throwError(string msg){
 	cout<<msg<<endl;
-	cin.clear(); //clear error flags
-    cin.ignore(INT_MAX,'\n'); //flush the buffer
 	
 }
 //////////////////////////////////////////////////////////////////////

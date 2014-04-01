@@ -6,10 +6,10 @@
 // Description: Header file for Set Object 
 // Filename:  Set.h 
 // Last modified on: 3/31/2014
-//  Created by: Dr. Monisha Pulimood
 
 /*/////////////////////////////////////////////////
-PUBLIC METHODS
+ DOCUMENTATION
+    PUBLIC METHODS
 /////////////////////////////////////////////////
 
 	Set():

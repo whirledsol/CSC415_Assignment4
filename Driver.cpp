@@ -7,7 +7,7 @@
 // Filename:  Driver.cpp
 // Last modified on: 3/31/2014
 //  Created by: Dr. Monisha Pulimood
-/*
+
 
 #include <iostream>
 #include "Complex.h"
@@ -28,7 +28,7 @@ int main(){
 	Set confederacy;
 	
 	ifstream fin;
-	fin.open("input.txt");
+	fin.open("inputs/input_small.txt");
 	
 	
 	fin >> test2;
@@ -57,4 +57,4 @@ int main(){
 	return 0;
 }
 
-*/
+
